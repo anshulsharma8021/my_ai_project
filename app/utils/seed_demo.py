@@ -7,6 +7,7 @@ def seed_demo_user(db: Session):
     """Create demo user if it doesn't exist"""
     demo_email = "demo@example.com"
     demo_password = "demo123"
+    demo_name = "Demo User"
     
     # Check if demo user already exists
     existing_user = db.query(User).filter(User.email == demo_email).first()
@@ -15,7 +16,9 @@ def seed_demo_user(db: Session):
         # Create demo user
         demo_user = User(
             email=demo_email,
-            hashed_password=hash_password(demo_password)
+            hashed_password=hash_password(demo_password),
+            name=demo_name,
+            language_preference="english"
         )
         db.add(demo_user)
         db.commit()

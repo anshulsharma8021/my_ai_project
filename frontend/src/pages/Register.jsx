@@ -7,6 +7,7 @@ import Navbar from '../components/Navbar';
 
 export default function Register() {
   const [email, setEmail] = useState('');
+  const [name, setName] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState('');
@@ -29,8 +30,8 @@ export default function Register() {
 
     setLoading(true);
     try {
-      const res = await registerUser({ email, password });
-      login(res.data.access_token);
+      const res = await registerUser({ email, password, name });
+      login(res.data.access_token, res.data.user);
       navigate('/chat');
     } catch (err) {
       setError('❌ Registration failed. Email may already exist.');
@@ -64,6 +65,18 @@ export default function Register() {
           {error && <div style={styles.error}>{error}</div>}
 
           <form onSubmit={handleSubmit} style={styles.form}>
+            <div style={styles.formGroup}>
+              <label style={styles.label}>Full Name</label>
+              <input
+                style={styles.input}
+                type="text"
+                placeholder="Your name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                disabled={loading}
+              />
+            </div>
+
             <div style={styles.formGroup}>
               <label style={styles.label}>Email Address</label>
               <input

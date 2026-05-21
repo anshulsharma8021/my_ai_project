@@ -1,6 +1,6 @@
 # app/services/chat_service.py
 from sqlalchemy.orm import Session
-from app.models.chat import Message, Conversation
+from app.models.conversation import Message, Conversation
 import uuid
 
 def save_message(db: Session, conversation_id: str, role: str, content: str):

@@ -32,7 +32,7 @@ export default function Login() {
 
     if (res.data.access_token) {
 
-      login(res.data.access_token);
+      login(res.data.access_token, res.data.user);
 
       navigate('/chat');
 
